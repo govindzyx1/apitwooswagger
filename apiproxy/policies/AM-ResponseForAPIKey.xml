@@ -1,0 +1,33 @@
+<AssignMessage name="AM-ResponseForAPIKey">
+  <AssignVariable>
+    <Name>timeFormatString</Name>
+    <Value>yyyyMMdd-HH:mm:ss.SSS</Value> <!-- EEEE -->
+  </AssignVariable>
+    <Set>
+      <Payload contentType='application/json'>{
+  "developerid": "{verifyapikey.VerifyAPIKey-1.developer.id}",
+  "developer.app.name": "{verifyapikey.VerifyAPIKey-1.developer.app.name}",
+  "apiproduct.name": "{verifyapikey.VerifyAPIKey-1.apiproduct.name}",
+  "quota" : {
+    "settings" : {
+      "quota.limit": {verifyapikey.VerifyAPIKey-1.apiproduct.developer.quota.limit},
+      "interval" : {verifyapikey.VerifyAPIKey-1.apiproduct.developer.quota.interval},
+      "timeunit" : "{verifyapikey.VerifyAPIKey-1.apiproduct.developer.quota.timeunit}"
+    },
+    "result" : {
+      "allowed" : {ratelimit.Quota-ForAPIKey.allowed.count},
+      "used" : {ratelimit.Quota-ForAPIKey.used.count},
+      "identifier" : "{ratelimit.Quota-ForAPIKey.identifier}",
+      "reset_at" : {ratelimit.Quota-ForAPIKey.expiry.time},
+      "reset" : {timeFormatUTCMs(timeFormatString,ratelimit.Quota-ForAPIKey.expiry.time)}",
+      "now" : {timeFormatUTCMs(timeFormatString,system.timestamp)}"
+    }
+  }
+}
+</Payload>
+      <StatusCode>200</StatusCode>
+      <ReasonPhrase>OK</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo>response</AssignTo>
+</AssignMessage>

@@ -1,0 +1,16 @@
+<APIProxy revision="1" name="quotatest">
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1497134620828</CreatedAt>
+    <CreatedBy>vijay@apigee.com</CreatedBy>
+    <Description>This demonstrates quotas. see https://github.com/DinoChiesa/Apigee-QuotaTest-1</Description>
+    <DisplayName>quotatest</DisplayName>
+    <LastModifiedAt>1497142813738</LastModifiedAt>
+    <LastModifiedBy>vijay@apigee.com</LastModifiedBy>
+    <Policies/>
+    <ProxyEndpoints>
+    </ProxyEndpoints>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints/>
+    <validate>false</validate>
+</APIProxy>

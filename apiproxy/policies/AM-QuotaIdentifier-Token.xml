@@ -1,0 +1,6 @@
+<AssignMessage name="AM-QuotaIdentifier-Token">
+  <AssignVariable>
+    <Name>my_quota_identifier</Name>
+    <Template>token-{client_id}</Template>
+  </AssignVariable>
+</AssignMessage>

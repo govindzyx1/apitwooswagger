@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="ops">
+  <HTTPProxyConnection>
+    <BasePath>/quotatest/ops</BasePath>
+    <Properties/>
+    <VirtualHost>secure</VirtualHost>
+  </HTTPProxyConnection>
+
+  <PreFlow name="PreFlow">
+    <Response>
+      <Step>
+        <Name>AM-CleanResponseHeaders</Name>
+      </Step>
+    </Response>
+  </PreFlow>
+
+  <PostFlow name="PostFlow"/>
+
+  <Flows>
+    <Flow name="get-token">
+      <Request>
+        <Step><Name>OAuth-VerifyAccessToken</Name></Step>
+        <Step><Name>AM-QuotaIdentifier-Token</Name></Step>
+        <Step><Name>Quota-ForToken</Name></Step>
+<!--
+        <Step>
+          <Name>GetTokenAttributes</Name>
+        </Step>
+-->
+      </Request>
+      <Response>
+        <Step>
+          <Name>AM-ResponseForAccessToken</Name>
+        </Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/withtoken") and (request.verb = "GET")</Condition>
+    </Flow>
+
+    <Flow name="get-apikey">
+      <Request>
+        <Step><Name>VerifyAPIKey-1</Name></Step>
+        <Step><Name>AM-QuotaIdentifier-APIKey</Name></Step>
+        <Step><Name>Quota-ForAPIKey</Name></Step>
+      </Request>
+      <Response>
+        <Step>
+          <Name>AM-ResponseForAPIKey</Name>
+        </Step>
+      </Response>
+      <Condition>(proxy.pathsuffix MatchesPath "/withkey") and (request.verb = "GET")</Condition>
+    </Flow>
+
+    <Flow name="unknown request">
+      <Request>
+        <Step>
+          <Name>RF-UnknownRequest</Name>
+        </Step>
+      </Request>
+      <Response>
+      </Response>
+    </Flow>
+
+  </Flows>
+
+
+  <RouteRule name="noroute"/>
+</ProxyEndpoint>

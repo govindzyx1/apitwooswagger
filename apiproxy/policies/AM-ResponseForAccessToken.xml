@@ -1,0 +1,37 @@
+<AssignMessage name="AM-ResponseForAccessToken">
+  <AssignVariable>
+    <Name>timeFormatString</Name>
+    <Value>yyyyMMdd-HH:mm:ss.SSS</Value> <!-- EEEE -->
+  </AssignVariable>
+    <Set>
+      <Payload contentType='application/json'>{
+  "access_token" : "{access_token}",
+  "scope": "{scope}",
+  "developerid": "{developer.id}",
+  "developer.app.name": "{developer.app.name}",
+  "expires_in": {expires_in},
+  "apiproduct.name": "{apiproduct.name}",
+  "status": "{status}",
+  "quota" : {
+    "settings" : {
+      "quota.limit": {apiproduct.developer.quota.limit},
+      "interval" : {apiproduct.developer.quota.interval},
+      "timeunit" : "{apiproduct.developer.quota.timeunit}"
+    },
+    "result" : {
+      "allowed" : {ratelimit.Quota-ForToken.allowed.count},
+      "used" : {ratelimit.Quota-ForToken.used.count},
+      "identifier" : "{ratelimit.Quota-ForToken.identifier}",
+      "reset_at" : {ratelimit.Quota-ForToken.expiry.time},
+      "reset" : {timeFormatUTCMs(timeFormatString,ratelimit.Quota-ForToken.expiry.time)}",
+      "now" : {timeFormatUTCMs(timeFormatString,system.timestamp)}"
+    }
+  }
+}
+</Payload>
+      <StatusCode>200</StatusCode>
+      <ReasonPhrase>OK</ReasonPhrase>
+    </Set>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <AssignTo>response</AssignTo>
+</AssignMessage>

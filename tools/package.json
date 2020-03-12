@@ -1,0 +1,16 @@
+{
+  "name": "tool-for-dinos-quota-demo",
+  "version": "1.0.1",
+  "description": "tool to provision and de-provision quota demonstration",
+  "main": "provisionQuotaDemo.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dchiesa@google.com",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "apigee-edge-js": "^0.4.14",
+    "node-getopt": "^0.3.2",
+    "sprintf-js": "^1.1.2"
+  }
+}
